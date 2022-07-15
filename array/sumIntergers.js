@@ -14,7 +14,7 @@ function findSumOfTarget(nums, sum) {
     for (let i = 0; i < nums.length - 1; i++) {
         for (let j = 0; j < i + 1; j++) {
             if (nums[i] + nums[j] === sum) {
-                return [nums[i], nums[j]];
+                return [nums[j], nums[i]];
             }
         }
     }
@@ -51,7 +51,7 @@ function findSumOfTarget2(nums, target) {
     for (let j = 0; j < mySet.size; j++) {
         let otherInteger = target - nums[j];
         if (mySet.has(otherInteger)) {
-            return [otherInteger, nums[j]];
+            return [nums[j], otherInteger];
         }
     }
     return [0, 0];
