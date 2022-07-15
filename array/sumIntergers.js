@@ -5,20 +5,24 @@ const target = 9;
 
 // ================================== (1) =====================================
 // Brute force approach 
-// Iterate over every element of the array nums[] where i is less than the length of the array.
-// Iterate over every element where j is less than the value of i plus 1.
+// Iterate over every element of the array nums[] twice.
 // Check if array nums[i] plus nums[j] is equal to the target.
-// If yes, return the numbers else go out of the loop and return [0, 0];
+// If yes, return the numbers else go out of the loop and return an empty array;
 
 function findSumOfTarget(nums, sum) {
+    // check params
+    if(!Array.isArray(nums) || typeof sum !== 'number') {
+        return;
+    }
+
     for (let i = 0; i < nums.length - 1; i++) {
-        for (let j = 0; j < i + 1; j++) {
+        for (let j = i + 1; j < nums.length; j++) {
             if (nums[i] + nums[j] === sum) {
-                return [nums[j], nums[i]];
+                return [nums[i], nums[j]];
             }
         }
     }
-    return [0, 0];
+    return [];
 }
 
 const haveSum = findSumOfTarget(nums, target);
@@ -33,17 +37,22 @@ console.log(haveSum);
 // ================================== (2) =====================================
 // Effiecient approach of solving the challenge
 // Create a set;
-// Iterate over every element of the array nums[] where i is less than the length of the array.
-// Check if mySet has the current element in the array is not equal to the target, add to the set;
-// Iterate over every element of the array nums[] where j is less than the size of the set.
-// Check if the second integer which is target minus the the current element nums[j].
-// If yes, return the numbers else go out of the loop and return [0, 0];
+// Iterate over every element of the array nums[].
+// Check if element is not equal to target and push to the set.
+// Iterate over every element of the array nums[];
+// Check if the second integer which is target minus the the current element nums[j] is equal to any element in the set.
+// If yes, return the numbers else go out of the loop and return an empty array;
 
 
 function findSumOfTarget2(nums, target) {
+    // check params
+    if(!Array.isArray(nums) || typeof target !== 'number') {
+        return;
+    }
+
     const mySet = new Set();
     for (let i = 0; i < nums.length; i++) {
-        if (nums[i] != target) {
+        if (nums[i] !== target) {
             mySet.add(nums[i]);
         }
     }
@@ -54,7 +63,7 @@ function findSumOfTarget2(nums, target) {
             return [nums[j], otherInteger];
         }
     }
-    return [0, 0];
+    return [];
 }
 
 const haveSum2 = findSumOfTarget2(nums, target);
